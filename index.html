@@ -10,6 +10,7 @@
             font-family: Arial, sans-serif;
             color: #FFFFFF;
             background-color: #000000;
+            scroll-behavior: smooth;
         }
         .section {
             height: 100vh;
@@ -75,6 +76,9 @@
 
     <script>
         const sections = document.querySelectorAll('.section');
+        const options = {
+            threshold: 0.1
+        };
         
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -82,12 +86,27 @@
                     entry.target.classList.add('section-visible');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
+        }, options);
 
         sections.forEach(section => {
             observer.observe(section);
+        });
+
+        let isScrolling;
+        let currentSectionIndex = 0;
+
+        window.addEventListener('wheel', (event) => {
+            clearTimeout(isScrolling);
+
+            isScrolling = setTimeout(() => {
+                const delta = Math.sign(event.deltaY);
+                if (delta > 0 && currentSectionIndex < sections.length - 1) {
+                    currentSectionIndex++;
+                } else if (delta < 0 && currentSectionIndex > 0) {
+                    currentSectionIndex--;
+                }
+                sections[currentSectionIndex].scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         });
     </script>
 
