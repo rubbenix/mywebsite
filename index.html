@@ -1,9 +1,95 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        MY FUTUR WEBSITE
-    </head>
-    <body>
-        IN CONSTRUCTION  :)
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Presentación</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #FFFFFF;
+            background-color: #000000;
+        }
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section:nth-child(even) {
+            background-color: #008080;
+        }
+        .section:nth-child(odd) {
+            background-color: #004040;
+        }
+        .content {
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section" id="section1">
+        <div class="content">
+            <h1>Bienvenido a mi página</h1>
+            <p>Hola, soy [Tu Nombre], y esta es una breve presentación sobre mí.</p>
+        </div>
+    </div>
+
+    <div class="section" id="section2">
+        <div class="content">
+            <h2>Sobre mí</h2>
+            <p>Soy un profesional apasionado por [tu área de trabajo o interés]. Me encanta [actividad relacionada].</p>
+        </div>
+    </div>
+
+    <div class="section" id="section3">
+        <div class="content">
+            <h2>Habilidades</h2>
+            <p>Tengo experiencia en [lista de habilidades o competencias].</p>
+        </div>
+    </div>
+
+    <div class="section" id="section4">
+        <div class="content">
+            <h2>Proyectos</h2>
+            <p>He trabajado en [breve descripción de proyectos relevantes].</p>
+        </div>
+    </div>
+
+    <div class="section" id="section5">
+        <div class="content">
+            <h2>Contacto</h2>
+            <p>Puedes contactarme a través de [tus datos de contacto].</p>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
 </html>
